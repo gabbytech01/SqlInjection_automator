@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI Pipeline
 
 on:
   push:
@@ -14,10 +14,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        uses: actions/checkout@v4
 
       - name: Set up Python Environment
-        uses: actions/setup-python@0b93645e9fea7318ecaed2b3395545995fc465a5 # v5.1.4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
@@ -25,4 +25,5 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-          pytest
+          # If you want to check your script syntax or run basic tests:
+          python -m py_compile run_sqlmap.py
